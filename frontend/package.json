@@ -24,9 +24,16 @@
     "preset": "react-native"
   },
   "prettier": {
-    "jsxBracketSameLine": true,
+    "jsxBracketSameLine": false,
     "semi": false,
-    "singleQuote": true
+    "singleQuote": true,
+    "insertPragma": true,
+    "trailingComma": "all",
+    "useTabs": false,
+    "jsxSingleQuote": false,
+    "tabWidth": 2,
+    "bracketSpacing": false,
+    "printWidth": 80
   },
   "husky": {
     "hooks": {
