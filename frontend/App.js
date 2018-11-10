@@ -1,11 +1,21 @@
 /**
+ * @format
  * @flow
  */
 
-import React, { Component } from 'react'
-import { FlatList, StyleSheet, Text, View, SafeAreaView } from 'react-native'
+import React, {Component} from 'react'
+import {FlatList, StyleSheet, Text, View, SafeAreaView} from 'react-native'
 
-export default class App extends Component {
+type Props = {}
+type State = {
+  loading: boolean,
+  data: Object<>,
+  error: string,
+  refreshing: boolean,
+  base_url: boolean,
+}
+
+export default class App extends Component<Props, State> {
   constructor(props) {
     super(props)
 
@@ -14,7 +24,7 @@ export default class App extends Component {
       data: [],
       error: null,
       refreshing: false,
-      base_url: 'http://127.0.0.1:8000'
+      base_url: 'http://127.0.0.1:8000',
     }
   }
 
@@ -26,7 +36,7 @@ export default class App extends Component {
     const url = 'http://127.0.0.1:8000/users.json'
 
     this.setState({
-      loading: true
+      loading: true,
     })
 
     fetch(url)
@@ -36,32 +46,32 @@ export default class App extends Component {
           data: res.results,
           error: null,
           loading: false,
-          refreshing: false
+          refreshing: false,
         })
       })
       .catch(error =>
         this.setState({
           error,
-          loading: false
-        })
+          loading: false,
+        }),
       )
   }
 
   handleRefresh = () =>
-    this.setState(
-      {
-        refreshing: true
-      },
-      () => this.fetchDataFromApi()
-    )
+    this.setState({refreshing: true}, () => this.fetchDataFromApi())
 
   render() {
     return (
       <SafeAreaView style={styles.container}>
         <FlatList
           data={this.state.data}
-          renderItem={({ item }) => (
-            <View style={{ flex: 1, marginTop: 40 }}>
+          renderItem={({item}) => (
+            <View
+              style={{
+                flex: 1,
+                marginTop: 40,
+              }}
+            >
               <Text style={styles.menuText}> {item.username} </Text>
               <Text style={styles.locText}> {item.email} </Text>
             </View>
@@ -80,16 +90,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#F5FCFF',
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10
+    margin: 10,
   },
   instructions: {
     textAlign: 'center',
     color: '#333333',
-    marginBottom: 5
-  }
+    marginBottom: 5,
+  },
 })
