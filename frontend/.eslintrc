@@ -1,6 +1,15 @@
 {
-    "parser": "babel-eslint",
-    "extends": "airbnb",
-    "plugins": ["react", "jsx-ally", "import"],
-    "sourceType": "module"
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "plugins": ["react", "jsx-ally", "import"],
+  "sourceType": "module",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true,
+      "experimentalObjectRestSpread": true
+    }
+  }
 }

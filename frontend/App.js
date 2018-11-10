@@ -12,20 +12,16 @@ type State = {
   data: Object<>,
   error: string,
   refreshing: boolean,
-  base_url: boolean,
+  base_url: string,
 }
 
 export default class App extends Component<Props, State> {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      loading: false,
-      data: [],
-      error: null,
-      refreshing: false,
-      base_url: 'http://127.0.0.1:8000',
-    }
+  state = {
+    loading: false,
+    data: [],
+    error: null,
+    refreshing: false,
+    base_url: 'http://127.0.0.1:8000',
   }
 
   componentDidMount() {
@@ -35,9 +31,7 @@ export default class App extends Component<Props, State> {
   fetchDataFromApi = () => {
     const url = 'http://127.0.0.1:8000/users.json'
 
-    this.setState({
-      loading: true,
-    })
+    this.setState({loading: true})
 
     fetch(url)
       .then(res => res.json())
@@ -49,12 +43,7 @@ export default class App extends Component<Props, State> {
           refreshing: false,
         })
       })
-      .catch(error =>
-        this.setState({
-          error,
-          loading: false,
-        }),
-      )
+      .catch(error => this.setState({error, loading: false}))
   }
 
   handleRefresh = () =>
