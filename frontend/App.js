@@ -55,12 +55,7 @@ export default class App extends Component<Props, State> {
         <FlatList
           data={this.state.data}
           renderItem={({item}) => (
-            <View
-              style={{
-                flex: 1,
-                marginTop: 40,
-              }}
-            >
+            <View style={{flex: 1, marginTop: 40}}>
               <Text style={styles.menuText}> {item.username} </Text>
               <Text style={styles.locText}> {item.email} </Text>
             </View>

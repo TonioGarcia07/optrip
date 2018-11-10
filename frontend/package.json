@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "prettier": "prettier '*.js'",
+    "precommit": "yarn test",
     "test": "jest",
     "flow start": "flow start",
     "flow stop": "flow stop",
