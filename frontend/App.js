@@ -3,7 +3,7 @@
  */
 
 import React, {Component} from 'react';
-import { FlatList, StyleSheet, Text, View} from 'react-native';
+import { FlatList, StyleSheet, Text, View, SafeAreaView} from 'react-native';
 
 export default class App extends Component {
   constructor(props) {
@@ -44,7 +44,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <FlatList
           data={this.state.data}
           renderItem={({ item }) => (
@@ -57,7 +57,7 @@ export default class App extends Component {
           onRefresh={this.handleRefresh}
           refreshing={this.state.refreshing}
         />
-      </View>
+      </SafeAreaView>
     );
   }
 }
