@@ -61,19 +61,15 @@ export default class App extends Component {
         <FlatList
           data={this.state.data}
           renderItem={({ item }) => (
-            <View
-              style={{
-                flex: 1,
-                marginTop: 40
-              }}>
-              <Text style={styles.menuText}> {item.username} </Text>{' '}
-              <Text style={styles.locText}> {item.email} </Text>{' '}
+            <View style={{ flex: 1, marginTop: 40 }}>
+              <Text style={styles.menuText}> {item.username} </Text>
+              <Text style={styles.locText}> {item.email} </Text>
             </View>
           )}
           keyExtractor={item => item.username}
           onRefresh={this.handleRefresh}
           refreshing={this.state.refreshing}
-        />{' '}
+        />
       </SafeAreaView>
     )
   }
