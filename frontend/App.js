@@ -1,29 +1,62 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
  * @flow
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import { FlatList, StyleSheet, Text, View} from 'react-native';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+export default class App extends Component {
+  constructor(props) {
+    super(props);
 
-type Props = {};
-export default class App extends Component<Props> {
+    this.state  = {
+      loading: false,
+      data: [],
+      error: null,
+      refreshing: false,
+      base_url: "http://127.0.0.1:8000"
+    }
+  }
+
+  componentDidMount() {
+    this.fetchDataFromApi();
+  }
+
+  fetchDataFromApi = ()  => {
+    const url = "http://127.0.0.1:8000/users.json";
+
+    this.setState({ loading: true });
+
+    fetch(url)
+      .then(res => res.json())
+      .then(res => {
+        this.setState({
+          data: res.results,
+          error: null,
+          loading: false,
+          refreshing: false
+        });
+      })
+      .catch(error => this.setState({ error, loading : false }))
+  };
+
+  handleRefresh = () => this.setState({ refreshing: true }, () => this.fetchDataFromApi());
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        <FlatList
+          data={this.state.data}
+          renderItem={({ item }) => (
+            <View style={{ flex: 1, marginTop: 40 }}>
+              <Text style={styles.menuText}>{item.username}</Text>
+              <Text style={styles.locText}>{item.email}</Text>
+            </View>
+          )}
+          keyExtractor={item => item.username}
+          onRefresh={this.handleRefresh}
+          refreshing={this.state.refreshing}
+        />
       </View>
     );
   }
