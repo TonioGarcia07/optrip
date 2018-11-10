@@ -3,8 +3,8 @@
  * @flow
  */
 
-import React, {Component} from 'react'
-import {FlatList, StyleSheet, Text, View, SafeAreaView} from 'react-native'
+import React, { Component } from 'react'
+import { FlatList, StyleSheet, Text, View, SafeAreaView } from 'react-native'
 
 type Props = {}
 type State = {
@@ -31,7 +31,7 @@ export default class App extends Component<Props, State> {
   fetchDataFromApi = () => {
     const url = 'http://127.0.0.1:8000/users.json'
 
-    this.setState({loading: true})
+    this.setState({ loading: true })
 
     fetch(url)
       .then(res => res.json())
@@ -43,19 +43,19 @@ export default class App extends Component<Props, State> {
           refreshing: false,
         })
       })
-      .catch(error => this.setState({error, loading: false}))
+      .catch(error => this.setState({ error, loading: false }))
   }
 
   handleRefresh = () =>
-    this.setState({refreshing: true}, () => this.fetchDataFromApi())
+    this.setState({ refreshing: true }, () => this.fetchDataFromApi())
 
   render() {
     return (
       <SafeAreaView style={styles.container}>
         <FlatList
           data={this.state.data}
-          renderItem={({item}) => (
-            <View style={{flex: 1, marginTop: 40}}>
+          renderItem={({ item }) => (
+            <View style={{ flex: 1, marginTop: 40 }}>
               <Text style={styles.menuText}> {item.username} </Text>
               <Text style={styles.locText}> {item.email} </Text>
             </View>

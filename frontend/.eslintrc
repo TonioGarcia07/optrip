@@ -1,7 +1,13 @@
 {
   "parser": "babel-eslint",
-  "extends": "airbnb",
-  "plugins": ["react", "jsx-ally", "import"],
+  "extends": [
+    "standard",
+    "prettier",
+    "prettier/flowtype",
+    "prettier/react",
+    "prettier/standard"
+  ],
+  "plugins": ["react", "react-native", "flowtype", "prettier", "standard"],
   "sourceType": "module",
   "parserOptions": {
     "ecmaVersion": 6,

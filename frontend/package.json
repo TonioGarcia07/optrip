@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "prettier": "prettier '*.js'",
-    "precommit": "yarn test",
+    "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
+    "precommit": "lint-staged",
     "test": "jest",
     "flow start": "flow start",
     "flow stop": "flow stop",
@@ -44,6 +45,12 @@
     "tabWidth": 2,
     "bracketSpacing": false,
     "printWidth": 80
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "husky": {
     "hooks": {
